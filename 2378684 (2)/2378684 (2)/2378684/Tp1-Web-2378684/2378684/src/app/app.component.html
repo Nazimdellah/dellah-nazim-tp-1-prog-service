@@ -1,0 +1,66 @@
+
+<div class="row justify-content-around text-center ">
+  <div class="col-8 ">
+    <h1>Artiste rechercher</h1>
+  </div>
+
+  <div class="row"></div>
+  <div class="col-3">
+
+
+    <form (ngSubmit)="searchArtist()" *ngIf="!result">
+      <div class="row">
+        <div class="col-8 ">
+          <div class="col-3">
+            <input type="text" name="artistName" [(ngModel)]="artist" class="form-control" placeholder="Nom d'un artiste">
+           <div class="row">
+            <input type="submit" value="Rechercher l'artiste" class="btn btn-light">
+           </div>
+
+          </div>
+
+
+      </div>
+    </form>
+
+    <form class="form-control" (ngSubmit)="nouvelleRecherche()" *ngIf="result">
+      <br>
+      <input type="submit" value="Nouvelle recherche">
+    </form>
+
+  </div>
+
+  <div class="col artists"><br></div>
+
+
+    <h1>Résultats Artiste</h1>
+
+    <table class= "table-bordered background-color: white" *ngIf="result">
+      <thead>
+        <tr>
+          <th scope="col">Nom de l'album</th>
+          <th scope="col">Iamge de l'album</th>
+          <th>Chansons</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of Albums">
+          <th scope="row" *ngIf="x.name">{{x.name}}</th>
+          <td><img (click)="chonson(x.name)" [src]="x.imageUrl ? x.imageUrl : 'assets/Image/none.webp' "></td>// il faudrait installer l'image et la mettre au bon emplacement
+
+          <td *ngIf="x.name == Show">
+            <ul>
+              <li *ngFor="let c of chansons">{{c}}</li>
+            </ul>
+          </td>
+          <td *ngIf="x.name != Show">
+            Affiche chonson (clique sur limage de la chonson)
+
+        </tr>
+
+      </tbody>
+    </table>
+
+
+</div>
